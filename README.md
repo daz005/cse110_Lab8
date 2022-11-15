@@ -11,3 +11,7 @@ page:
 
 Answer: (1) Within a Github action that runs whenever code is pushed a, so that if there are bugs that break down the feature can be found at this point to be fixed before merge the code into the main branch.  
 
+2) Would you use an end to end test to check if a function is returning the correct output? (yes/no)
+
+Answer: no. To check if a function is returning the correct output, an unit test can be used.
+
