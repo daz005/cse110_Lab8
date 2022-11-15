@@ -41,7 +41,7 @@ describe('Basic user flow for Website', () => {
     // Grab the .data property of <product-items> to grab all of the json data stored inside
     for ( i = 0; i < prodItems.length; i++)
     {
-      console.log(`---------------Checking for product items #${ i }: `);
+      allArePopulated = true;
       data = await prodItems[i].getProperty('data');
       // Convert that property to JSON
       plainValue = await data.jsonValue();
@@ -60,11 +60,39 @@ describe('Basic user flow for Website', () => {
   it('Clicking the "Add to Cart" button should change button text', async () => {
     console.log('Checking the "Add to Cart" button...');
     // TODO - Step 2
+    console.log('----------TODO - Step 2:');
     // Query a <product-item> element using puppeteer ( checkout page.$() and page.$$() in the docs )
+    const element = await page.$('product-item');
+    //console.log(element);
+    
     // Grab the shadowRoot of that element (it's a property), then query a button from that shadowRoot.
+    const shadowRoot = await element.getProperty('shadowRoot');
+    //console.log(shadowRoot);
+    const button = await shadowRoot.$('button');
+    //console.log(button);
+    
     // Once you have the button, you can click it and check the innerText property of the button.
+    const button_cliecked = await button.click();
+    //console.log(button_cliecked);
+    let innerText = await button.getProperty('innerText');
+    //console.log(innerText);
+    
     // Once you have the innerText property, use innerText['_remoteObject'].value to get the text value of it
+    const _remoteObject = await innerText.getProperty('_remoteObject');
+    const plainValue = await _remoteObject.jsonValue();
+    console.log(plainValue);
+
+    //const _remoteObject = await innerText.getProperty('_remoteObject');
+    //console.log(_remoteObject);
+    // const text_value= await innerText.evaluate(el => el.value);
+    // console.log(text_value);
+    // const text_value2 = await (await innerText.getProperty('textContent')).jsonValue();
+    // console.log(text_value2);
+    // const text_value3 = await (await innerText.getProperty('_remoteObject')).jsonValue();
+    // console.log(text_value3);
+
   }, 2500);
+
 
   // Check to make sure that after clicking "Add to Cart" on every <product-item> that the Cart
   // number in the top right has been correctly updated
