@@ -60,36 +60,23 @@ describe('Basic user flow for Website', () => {
   it('Clicking the "Add to Cart" button should change button text', async () => {
     console.log('Checking the "Add to Cart" button...');
     // TODO - Step 2
-    console.log('----------TODO - Step 2:');
     // Query a <product-item> element using puppeteer ( checkout page.$() and page.$$() in the docs )
-    const element = await page.$('product-item');
-    //console.log(element);
+    const elements = await page.$$('product-item');
     
     // Grab the shadowRoot of that element (it's a property), then query a button from that shadowRoot.
-    const shadowRoot = await element.getProperty('shadowRoot');
-    //console.log(shadowRoot);
+    const shadowRoot = await elements[0].getProperty('shadowRoot');
     const button = await shadowRoot.$('button');
-    //console.log(button);
+    let innerText = await button.getProperty('innerText');
+    let jsonValue = await innerText.jsonValue();
+    expect(jsonValue).toBe("Add to Cart");
     
     // Once you have the button, you can click it and check the innerText property of the button.
-    const button_cliecked = await button.click();
-    //console.log(button_cliecked);
-    let innerText = await button.getProperty('innerText');
-    //console.log(innerText);
+    await button.click();
+    innerText = await button.getProperty('innerText');
+    jsonValue = await innerText.jsonValue();
+    expect(jsonValue).toBe("Remove from Cart");
     
     // Once you have the innerText property, use innerText['_remoteObject'].value to get the text value of it
-    const _remoteObject = await innerText.getProperty('_remoteObject');
-    const plainValue = await _remoteObject.jsonValue();
-    console.log(plainValue);
-
-    //const _remoteObject = await innerText.getProperty('_remoteObject');
-    //console.log(_remoteObject);
-    // const text_value= await innerText.evaluate(el => el.value);
-    // console.log(text_value);
-    // const text_value2 = await (await innerText.getProperty('textContent')).jsonValue();
-    // console.log(text_value2);
-    // const text_value3 = await (await innerText.getProperty('_remoteObject')).jsonValue();
-    // console.log(text_value3);
 
   }, 2500);
 
