@@ -22,3 +22,6 @@ Answer: yes. the send out or receive from a message is an individual parts of th
 4) Would you use a unit test to test the “max message length” feature of a messaging application? Why or why not? For this question, assume the “max message length” feature prevents the user from typing more than 80 characters.
 
 Answer: Yes. We can isolate the code that check message length as an unit,  then test it.
+
+5) test results : ![Alt text](./lab8_screenshot.png?raw=true "lab8")
+
