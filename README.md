@@ -1,7 +1,7 @@
 # Lab 8 - Starter
 
 Name: Derek Zhu
-page:
+# page: https://daz005.github.io/cse110_Lab8/
 
 1) Where would you fit your automated tests in your Recipe project development pipeline? Select one of the following and explain why.
 
